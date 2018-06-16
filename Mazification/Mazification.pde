@@ -1,53 +1,56 @@
 import processing.dxf.*;
-
 import peasy.*;
 import peasy.org.apache.commons.math.*;
 import peasy.org.apache.commons.math.geometry.*;  
 import processing.sound.*;
+
 SoundFile in;
 SoundFile out;
 PeasyCam cam;
 
-boolean record;
-
 PImage image1;
 PImage image2;
-int threshold=45;
-int step=0;
+
 IntList points1 = new IntList();
-//IntList points2 = new IntList();
+
 ArrayList<PVector> points = new ArrayList<PVector>();
 ArrayList<newLine> lines = new ArrayList<newLine>();
 ArrayList waves = new ArrayList();
+
 wavyLine [] wavyLines;
-float rotation =90;
+
+boolean record;
 boolean orbit = false;
-float zoom=0;
 boolean controlZoom=false;
 
+int threshold=45;
+int step=0;
 int weight=1;
 int initX=-700;
 int initX_=initX+200;
 int step_=0;
 int l=0;
 
+float rotation =90;
+float zoom=0;
 float sine=0;
 float cosine=0;
 float incr=0;
-String name="Incept2Processing";
+
+String name="ExampleString";
+
 void setup() {
   size(800, 800, P3D);
-  // frameRate(10);
+
   cam = new PeasyCam(this, 190);
 
-  image1 = loadImage("headalpha2.jpg");
-  //  image2 = loadImage("headalpha2.jpg");
+  image1 = loadImage("Example1.jpg");
+  image2 = loadImage("Example2.jpg");
+
   in = new SoundFile(this, "in.mp3");
-  // in.play();
   out = new SoundFile(this, "out.mp3");
-  //  out.play();
+
   int dimension = image1.width * image1.height;
-  int i =0;
 
   getTXT();
   //getPicture(image1);
@@ -55,7 +58,9 @@ void setup() {
   println("points array size "+points.size());
 
 
-  //input amount of nodes
+  //input amount of nodes//
+  //Selected the graph connecting function//
+
   //dumbConnect(3,4);
   //smartConnect(16);
   connectedGraph();
@@ -65,11 +70,10 @@ void setup() {
   println("line array size "+lines.size());
   println("entering Draw");
 }
-//-16777216
-//-1//white`    
+
 void draw() {
   background(255);
-  //frameRate(10);
+
   if (record) {
     beginRaw(DXF, name+".dxf");
   }
@@ -77,13 +81,10 @@ void draw() {
   orbiting(orbit);
 
   pushMatrix();
-  // translate(0,0, -800);
-  // rotate(3*P);
 
   for (newLine v : lines) {
-    // if (v.end.z>10) {
+
     v.show(1, color(0));
-    // }
   }
 
 
@@ -133,22 +134,15 @@ void getTXT() {
       }
     }
 
-    //if(random(1)<0.){
     points.add(new PVector(Float.parseFloat(x), Float.parseFloat(y), Float.parseFloat(z)));
-    //}
-    // println(lines[i]);
   }
 }
 void getPicture(PImage img) {
   img.loadPixels();
   for (int x = 1; x < image1.width-1; x += 1) { 
     for (int y = 1; y< image1.height-1; y+=1) {
-      //points.append(int(map(image1.pixels[i],-16777216,-1,200,0))); 
 
-      // if (random(1)<0.5) {
       points.add(new PVector(x, y, int(map(image1.pixels[x+y*image1.width], -16777216, -1, 0, 80))));
-      //points.add(new PVector(int(random(0,300)),int(random(0,300)), int(random(0,300))));
-      // }
     }
   }
   img.updatePixels();
@@ -311,7 +305,5 @@ void keyPressed() {
     }
   } else if (key == 't') {
     record = true;
-  } else {
-    //threshold adjustments
   }
 }

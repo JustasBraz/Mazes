@@ -35,7 +35,6 @@ class Cell {
   }
   
   Cell checkNeighbors () {
-    //IntList neighbors = new IntList;
     ArrayList <Cell> neighbors = new ArrayList<Cell>();
 
     Cell top    = grid.get(index(i, j -1));

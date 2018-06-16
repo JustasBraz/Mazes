@@ -10,7 +10,6 @@ void setup() {
     PVector v = new PVector(random(width), random(height));
     vertices.add(v);
   }
-
 }
 
 void mousePressed() {
@@ -51,7 +50,7 @@ void draw() {
     strokeWeight(2);
     PVector p1 = reached.get(rIndex);
     PVector p2 = unreached.get(uIndex);
-    line(p1.x,p1.y, p2.x, p2.y);
+    line(p1.x, p1.y, p2.x, p2.y);
     reached.add(p2);
     unreached.remove(uIndex);
   }
@@ -62,5 +61,4 @@ void draw() {
     stroke(255);
     ellipse(v.x, v.y, 16, 16);
   }
-
 }
